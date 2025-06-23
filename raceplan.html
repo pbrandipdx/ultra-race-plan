@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultra Marathon Training Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .day-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .week-header {
+            grid-column: 1 / -1; /* Span across all columns */
+        }
+        .race-day {
+            background-color: #581c87; /* A deep purple for race day */
+            border-color: #a855f7; /* A lighter purple for the border */
+        }
+        .race-day:hover {
+             background-color: #6b21a8;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white p-4 sm:p-6 md:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-cyan-400">Three Sisters Skyline 50k Training Plan</h1>
+            <p class="text-lg md:text-xl text-gray-300 mt-2">June 23, 2025 - September 20, 2025</p>
+        </header>
+
+        <div id="plan-container" class="space-y-12">
+            <!-- Workouts will be dynamically generated here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        const trainingPlan = [
+            // Week 1
+            { week: 1, title: 'Base Building', days: [
+                { day: 'Monday', date: 'June 23', run: '3 miles easy', strength: 'Upper Body', exercises: ['Bench Press: 3x8', 'Bent Over Row: 3x8/arm', 'Push Ups: 3xAMRAP', 'Pull Ups: 3xAMRAP'] },
+                { day: 'Tuesday', date: 'June 24', run: '4 miles w/ 4x strides', strength: 'Lower Body', exercises: ['Goblet Squat: 4x10', 'B-Stance RDLs: 4x8/leg', 'Calf Raises: 3x15'] },
+                { day: 'Wednesday', date: 'June 25', run: 'Rest or cross-train', strength: 'Core & Mobility', exercises: ['Hollow Hold: 4x30s', 'High Plank K2E: 4x8/side', 'Cossack Squats: 4x6/side'] },
+                { day: 'Thursday', date: 'June 26', run: '4 miles easy', strength: 'Upper Body', exercises: ['Strict Press: 3x8', 'One Arm Rows: 3x10/arm', 'Lateral Raise: 3x12', 'V-Up: 3x15'] },
+                { day: 'Friday', date: 'June 27', run: 'Rest', strength: 'Full Body Power', exercises: ['KB Swings: 5x10', 'Push Press: 5x8', 'Farmer Hold: 5x45s'] },
+                { day: 'Saturday', date: 'June 28', run: '6 miles long run', strength: 'Active Recovery', exercises: ['Supine Twists: 1 min', 'Cat/Cow: 1 min', 'Scorpion: 30s/side'] },
+                { day: 'Sunday', date: 'June 29', run: 'Rest Day', strength: null, exercises: [] }
+            ]},
+            // Week 2
+            { week: 2, title: 'Increasing Volume', days: [
+                { day: 'Monday', date: 'June 30', run: '3 miles easy', strength: 'Upper Body', exercises: ['Bench Press: 3x8', 'Bent Over Row: 3x8/arm', 'Push Ups: 3xAMRAP', 'Pull Ups: 3xAMRAP'] },
+                { day: 'Tuesday', date: 'July 1', run: '4 miles w/ 6x strides', strength: 'Lower Body', exercises: ['Goblet Squat: 4x10', 'B-Stance RDLs: 4x8/leg', 'Calf Raises: 3x15'] },
+                { day: 'Wednesday', date: 'July 2', run: 'Rest or cross-train', strength: 'Core & Mobility', exercises: ['Hollow Hold: 4x30s', 'High Plank K2E: 4x8/side', 'Cossack Squats: 4x6/side'] },
+                { day: 'Thursday', date: 'July 3', run: '5 miles tempo', strength: 'Upper Body', exercises: ['Strict Press: 3x8', 'One Arm Rows: 3x10/arm', 'Lateral Raise: 3x12', 'V-Up: 3x15'] },
+                { day: 'Friday', date: 'July 4', run: 'Rest', strength: 'Full Body Power', exercises: ['KB Swings: 5x10', 'Push Press: 5x8', 'Farmer Hold: 5x45s'] },
+                { day: 'Saturday', date: 'July 5', run: '8 miles long run', strength: 'Active Recovery', exercises: ['Supine Twists: 1 min', 'Cat/Cow: 1 min', 'Scorpion: 30s/side'] },
+                { day: 'Sunday', date: 'July 6', run: 'Rest Day', strength: null, exercises: [] }
+            ]},
+            // ... And so on for all 13 weeks. This script will generate the HTML.
+        ];
+        
+        const fullPlan = [
+            ...trainingPlan,
+            // Week 3
+            { week: 3, title: 'Adding Intensity', days: [
+                { day: 'Monday', date: 'July 7', run: '4 miles easy', strength: 'Upper Body', exercises: ['Bench Press: 3x8', 'Bent Over Row: 3x8/arm', 'Push Ups: 3xAMRAP', 'Pull Ups: 3xAMRAP'] },
+                { day: 'Tuesday', date: 'July 8', run: '5 miles w/ hill repeats', strength: 'Lower Body', exercises: ['Goblet Squat: 4x10', 'B-Stance RDLs: 4x8/leg', 'Calf Raises: 3x15'] },
+                { day: 'Wednesday', date: 'July 9', run: 'Rest or cross-train', strength: 'Core & Mobility', exercises: ['Hollow Hold: 4x30s', 'High Plank K2E: 4x8/side', 'Cossack Squats: 4x6/side'] },
+                { day: 'Thursday', date: 'July 10', run: '5 miles easy', strength: 'Upper Body', exercises: ['Strict Press: 3x8', 'One Arm Rows: 3x10/arm', 'Lateral Raise: 3x12', 'V-Up: 3x15'] },
+                { day: 'Friday', date: 'July 11', run: 'Rest', strength: 'Full Body Power', exercises: ['KB Swings: 5x10', 'Push Press: 5x8', 'Farmer Hold: 5x45s'] },
+                { day: 'Saturday', date: 'July 12', run: '10 miles long run', strength: 'Active Recovery', exercises: ['Supine Twists: 1 min', 'Cat/Cow: 1 min', 'Scorpion: 30s/side'] },
+                { day: 'Sunday', date: 'July 13', run: 'Rest Day', strength: null, exercises: [] }
+            ]},
+            // Week 4 (Recovery)
+            { week: 4, title: 'Recovery Week', days: [
+                { day: 'Monday', date: 'July 14', run: '3 miles easy', strength: 'Upper Body (light)', exercises: ['Push Ups: 3x10', 'Band Pull-Aparts: 3x15'] },
+                { day: 'Tuesday', date: 'July 15', run: '4 miles easy', strength: 'Lower Body (light)', exercises: ['Bodyweight Squats: 3x20', 'Glute Bridges: 3x15'] },
+                { day: 'Wednesday', date: 'July 16', run: 'Rest', strength: 'Core & Mobility', exercises: ['Hollow Hold: 4x30s', 'High Plank K2E: 4x8/side', 'Cossack Squats: 4x6/side'] },
+                { day: 'Thursday', date: 'July 17', run: '4 miles easy', strength: 'Light Upper Body', exercises: ['Plank Rows: 3x10/arm', 'Lateral Raises (light): 3x15'] },
+                { day: 'Friday', date: 'July 18', run: 'Rest', strength: 'Active Recovery', exercises: ['Supine Twists: 1 min', 'Cat/Cow: 1 min', 'Scorpion: 30s/side'] },
+                { day: 'Saturday', date: 'July 19', run: '6 miles easy', strength: null, exercises: [] },
+                { day: 'Sunday', date: 'July 20', run: 'Rest Day', strength: null, exercises: [] }
+            ]},
+            // Week 5
+            { week: 5, title: 'Building Endurance', days: [
+                { day: 'Monday', date: 'July 21', run: '4 miles easy', strength: 'Upper Body', exercises: ['Bench Press: 3x8', 'Bent Over Row: 3x8/arm', 'Push Ups: 3xAMRAP', 'Pull Ups: 3xAMRAP'] },
+                { day: 'Tuesday', date: 'July 22', run: '6 miles w/ 8x strides', strength: 'Lower Body', exercises: ['Goblet Squat: 4x10', 'B-Stance RDLs: 4x8/leg', 'Calf Raises: 3x15'] },
+                { day: 'Wednesday', date: 'July 23', run: 'Rest or cross-train', strength: 'Core & Mobility', exercises: ['Hollow Hold: 4x30s', 'High Plank K2E: 4x8/side', 'Cossack Squats: 4x6/side'] },
+                { day: 'Thursday', date: 'July 24', run: '6 miles tempo', strength: 'Upper Body', exercises: ['Strict Press: 3x8', 'One Arm Rows: 3x10/arm', 'Lateral Raise: 3x12', 'V-Up: 3x15'] },
+                { day: 'Friday', date: 'July 25', run: 'Rest', strength: 'Full Body Power', exercises: ['KB Swings: 5x10', 'Push Press: 5x8', 'Farmer Hold: 5x45s'] },
+                { day: 'Saturday', date: 'July 26', run: '12 miles long run', strength: 'Active Recovery', exercises: ['Supine Twists: 1 min', 'Cat/Cow: 1 min', 'Scorpion: 30s/side'] },
+                { day: 'Sunday', date: 'July 27', run: 'Rest Day', strength: null, exercises: [] }
+            ]},
+            // Week 6
+            { week: 6, title: 'Hill Work', days: [
+                { day: 'Monday', date: 'July 28', run: '5 miles easy', strength: 'Upper Body', exercises: ['Bench Press: 3x8', 'Bent Over Row: 3x8/arm', 'Push Ups: 3xAMRAP', 'Pull Ups: 3xAMRAP'] },
+                { day: 'Tuesday', date: 'July 29', run: '6 miles w/ hill repeats', strength: 'Lower Body', exercises: ['Goblet Squat: 4x10', 'B-Stance RDLs: 4x8/leg', 'Calf Raises: 3x15'] },
+                { day: 'Wednesday', date: 'July 30', run: 'Rest or cross-train', strength: 'Core & Mobility', exercises: ['Hollow Hold: 4x30s', 'High Plank K2E: 4x8/side', 'Cossack Squats: 4x6/side'] },
+                { day: 'Thursday', date: 'July 31', run: '6 miles easy', strength: 'Upper Body', exercises: ['Strict Press: 3x8', 'One Arm Rows: 3x10/arm', 'Lateral Raise: 3x12', 'V-Up: 3x15'] },
+                { day: 'Friday', date: 'Aug 1', run: 'Rest', strength: 'Full Body Power', exercises: ['KB Swings: 5x10', 'Push Press: 5x8', 'Farmer Hold: 5x45s'] },
+                { day: 'Saturday', date: 'Aug 2', run: '14 miles long run', strength: 'Active Recovery', exercises: ['Supine Twists: 1 min', 'Cat/Cow: 1 min', 'Scorpion: 30s/side'] },
+                { day: 'Sunday', date: 'Aug 3', run: 'Rest Day', strength: null, exercises: [] }
+            ]},
+             // Week 7
+            { week: 7, title: 'Sustained Effort', days: [
+                { day: 'Monday', date: 'Aug 4', run: '5 miles easy', strength: 'Upper Body', exercises: ['Bench Press: 3x8', 'Bent Over Row: 3x8/arm', 'Push Ups: 3xAMRAP', 'Pull Ups: 3xAMRAP'] },
+                { day: 'Tuesday', date: 'Aug 5', run: '7 miles w/ 8x strides', strength: 'Lower Body', exercises: ['Goblet Squat: 4x10', 'B-Stance RDLs: 4x8/leg', 'Calf Raises: 3x15'] },
+                { day: 'Wednesday', date: 'Aug 6', run: 'Rest or cross-train', strength: 'Core & Mobility', exercises: ['Hollow Hold: 4x30s', 'High Plank K2E: 4x8/side', 'Cossack Squats: 4x6/side'] },
+                { day: 'Thursday', date: 'Aug 7', run: '7 miles tempo', strength: 'Upper Body', exercises: ['Strict Press: 3x8', 'One Arm Rows: 3x10/arm', 'Lateral Raise: 3x12', 'V-Up: 3x15'] },
+                { day: 'Friday', date: 'Aug 8', run: 'Rest', strength: 'Full Body Power', exercises: ['KB Swings: 5x10', 'Push Press: 5x8', 'Farmer Hold: 5x45s'] },
+                { day: 'Saturday', date: 'Aug 9', run: '16 miles long run', strength: 'Active Recovery', exercises: ['Supine Twists: 1 min', 'Cat/Cow: 1 min', 'Scorpion: 30s/side'] },
+                { day: 'Sunday', date: 'Aug 10', run: 'Rest Day', strength: null, exercises: [] }
+            ]},
+            // Week 8 (Recovery)
+            { week: 8, title: 'Recovery Week', days: [
+                { day: 'Monday', date: 'Aug 11', run: '4 miles easy', strength: 'Upper Body (light)', exercises: ['Push Ups: 3x10', 'Band Pull-Aparts: 3x15'] },
+                { day: 'Tuesday', date: 'Aug 12', run: '5 miles easy', strength: 'Lower Body (light)', exercises: ['Bodyweight Squats: 3x20', 'Glute Bridges: 3x15'] },
+                { day: 'Wednesday', date: 'Aug 13', run: 'Rest', strength: 'Core & Mobility', exercises: ['Hollow Hold: 4x30s', 'High Plank K2E: 4x8/side', 'Cossack Squats: 4x6/side'] },
+                { day: 'Thursday', date: 'Aug 14', run: '5 miles easy', strength: 'Light Upper Body', exercises: ['Plank Rows: 3x10/arm', 'Lateral Raises (light): 3x15'] },
+                { day: 'Friday', date: 'Aug 15', run: 'Rest', strength: 'Active Recovery', exercises: ['Supine Twists: 1 min', 'Cat/Cow: 1 min', 'Scorpion: 30s/side'] },
+                { day: 'Saturday', date: 'Aug 16', run: '8 miles easy', strength: null, exercises: [] },
+                { day: 'Sunday', date: 'Aug 17', run: 'Rest Day', strength: null, exercises: [] }
+            ]},
+            // Week 9 (Peak Week 1)
+            { week: 9, title: 'Peak Week 1', days: [
+                { day: 'Monday', date: 'Aug 18', run: '6 miles easy', strength: 'Upper Body', exercises: ['Bench Press: 3x8', 'Bent Over Row: 3x8/arm', 'Push Ups: 3xAMRAP', 'Pull Ups: 3xAMRAP'] },
+                { day: 'Tuesday', date: 'Aug 19', run: '8 miles w/ hill repeats', strength: 'Lower Body', exercises: ['Goblet Squat: 4x10', 'B-Stance RDLs: 4x8/leg', 'Calf Raises: 3x15'] },
+                { day: 'Wednesday', date: 'Aug 20', run: 'Rest or cross-train', strength: 'Core & Mobility', exercises: ['Hollow Hold: 4x30s', 'High Plank K2E: 4x8/side', 'Cossack Squats: 4x6/side'] },
+                { day: 'Thursday', date: 'Aug 21', run: '8 miles tempo', strength: 'Upper Body', exercises: ['Strict Press: 3x8', 'One Arm Rows: 3x10/arm', 'Lateral Raise: 3x12', 'V-Up: 3x15'] },
+                { day: 'Friday', date: 'Aug 22', run: 'Rest', strength: 'Active Recovery', exercises: ['Supine Twists: 1 min', 'Cat/Cow: 1 min', 'Scorpion: 30s/side'] },
+                { day: 'Saturday', date: 'Aug 23', run: '20 miles long run', strength: null, exercises: [] },
+                { day: 'Sunday', date: 'Aug 24', run: 'Rest Day', strength: null, exercises: [] }
+            ]},
+            // Week 10 (Peak Week 2)
+            { week: 10, title: 'Peak Week 2', days: [
+                { day: 'Monday', date: 'Aug 25', run: '6 miles easy', strength: 'Upper Body', exercises: ['Bench Press: 3x8', 'Bent Over Row: 3x8/arm', 'Push Ups: 3xAMRAP', 'Pull Ups: 3xAMRAP'] },
+                { day: 'Tuesday', date: 'Aug 26', run: '8 miles w/ 10x strides', strength: 'Lower Body', exercises: ['Goblet Squat: 4x10', 'B-Stance RDLs: 4x8/leg', 'Calf Raises: 3x15'] },
+                { day: 'Wednesday', date: 'Aug 27', run: 'Rest or cross-train', strength: 'Core & Mobility', exercises: ['Hollow Hold: 4x30s', 'High Plank K2E: 4x8/side', 'Cossack Squats: 4x6/side'] },
+                { day: 'Thursday', date: 'Aug 28', run: '8 miles easy', strength: 'Upper Body', exercises: ['Strict Press: 3x8', 'One Arm Rows: 3x10/arm', 'Lateral Raise: 3x12', 'V-Up: 3x15'] },
+                { day: 'Friday', date: 'Aug 29', run: 'Rest', strength: 'Active Recovery', exercises: ['Supine Twists: 1 min', 'Cat/Cow: 1 min', 'Scorpion: 30s/side'] },
+                { day: 'Saturday', date: 'Aug 30', run: '24 miles long run', strength: null, exercises: [] },
+                { day: 'Sunday', date: 'Aug 31', run: '6 miles easy', strength: null, exercises: [] }
+            ]},
+            // Week 11 (Taper)
+            { week: 11, title: 'Taper Week 1', days: [
+                { day: 'Monday', date: 'Sep 1', run: '5 miles easy', strength: 'Upper Body (light)', exercises: ['Push Ups: 3x10', 'Band Pull-Aparts: 3x15'] },
+                { day: 'Tuesday', date: 'Sep 2', run: '6 miles w/ 6x strides', strength: 'Lower Body (light)', exercises: ['Bodyweight Squats: 3x20', 'Glute Bridges: 3x15'] },
+                { day: 'Wednesday', date: 'Sep 3', run: 'Rest', strength: 'Core & Mobility', exercises: ['Hollow Hold: 4x30s', 'High Plank K2E: 4x8/side', 'Cossack Squats: 4x6/side'] },
+                { day: 'Thursday', date: 'Sep 4', run: '5 miles tempo (light)', strength: 'Light Upper Body', exercises: ['Plank Rows: 3x10/arm', 'Lateral Raises (light): 3x15'] },
+                { day: 'Friday', date: 'Sep 5', run: 'Rest', strength: 'Active Recovery', exercises: ['Supine Twists: 1 min', 'Cat/Cow: 1 min', 'Scorpion: 30s/side'] },
+                { day: 'Saturday', date: 'Sep 6', run: '12 miles long run', strength: null, exercises: [] },
+                { day: 'Sunday', date: 'Sep 7', run: 'Rest Day', strength: null, exercises: [] }
+            ]},
+            // Week 12 (Taper)
+            { week: 12, title: 'Taper Week 2', days: [
+                { day: 'Monday', date: 'Sep 8', run: '4 miles easy', strength: 'Light Mobility', exercises: ['Cat/Cow: 3x10', 'World\'s Greatest Stretch: 3x5/side'] },
+                { day: 'Tuesday', date: 'Sep 9', run: '4 miles w/ 4x strides', strength: null, exercises: [] },
+                { day: 'Wednesday', date: 'Sep 10', run: 'Rest', strength: 'Active Recovery', exercises: ['Foam Rolling', 'Light Stretching'] },
+                { day: 'Thursday', date: 'Sep 11', run: '3 miles easy', strength: null, exercises: [] },
+                { day: 'Friday', date: 'Sep 12', run: 'Rest', strength: null, exercises: [] },
+                { day: 'Saturday', date: 'Sep 13', run: '6 miles easy', strength: null, exercises: [] },
+                { day: 'Sunday', date: 'Sep 14', run: 'Rest Day', strength: null, exercises: [] }
+            ]},
+            // Week 13 (Race Week)
+            { week: 13, title: 'Race Week', days: [
+                { day: 'Monday', date: 'Sep 15', run: '3 miles easy', strength: null, exercises: [] },
+                { day: 'Tuesday', date: 'Sep 16', run: '2 miles easy w/ 2x strides', strength: null, exercises: [] },
+                { day: 'Wednesday', date: 'Sep 17', run: 'Rest', strength: null, exercises: [] },
+                { day: 'Thursday', date: 'Sep 18', run: '1-2 miles very easy shakeout', strength: null, exercises: [] },
+                { day: 'Friday', date: 'Sep 19', run: 'Complete Rest', strength: null, exercises: [] },
+                { day: 'Saturday', date: 'Sep 20', run: 'RACE DAY! Three Sisters Skyline 50k', strength: null, exercises: [], isRaceDay: true },
+                { day: 'Sunday', date: 'Sep 21', run: 'Active Recovery or Rest', strength: null, exercises: [] }
+            ]},
+        ];
+
+        function renderPlan() {
+            const container = document.getElementById('plan-container');
+            let content = '';
+
+            fullPlan.forEach(week => {
+                content += `
+                    <section>
+                        <h2 class="text-3xl font-bold text-center mb-6 week-header">${`Week ${week.week}: ${week.title}`}</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-7 gap-6">
+                `;
+                week.days.forEach(day => {
+                    const raceDayClass = day.isRaceDay ? 'race-day' : '';
+                    content += `
+                        <div class="day-card bg-gray-800 rounded-lg p-6 ${raceDayClass}">
+                            <h2 class="text-xl font-bold mb-4 border-b-2 border-cyan-500 pb-2">${day.day}, ${day.date}</h2>
+                            <div class="flex-grow">
+                                <div class="mb-4">
+                                    <h3 class="text-lg font-semibold text-green-400 mb-2">Running</h3>
+                                    <p>${day.run}</p>
+                                </div>
+                                ${day.strength ? `
+                                <div>
+                                    <h3 class="text-lg font-semibold text-cyan-400 mb-2">Strength: ${day.strength}</h3>
+                                    <ul class="list-disc list-inside text-gray-300 space-y-1">
+                                        ${day.exercises.map(ex => `<li>${ex}</li>`).join('')}
+                                    </ul>
+                                </div>` : day.run === 'Rest Day' ? `
+                                <div class="flex justify-center items-center h-full">
+                                    <div class="text-center">
+                                        <h3 class="text-2xl font-semibold text-gray-300">Rest Day</h3>
+                                        <p class="text-gray-400">Focus on nutrition & hydration.</p>
+                                    </div>
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+                content += `</div></section>`;
+            });
+
+            container.innerHTML = content;
+        }
+
+        renderPlan();
+    </script>
+</body>
+</html>
